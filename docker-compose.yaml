@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: marine-website-client
-    container_name: MarineWebSiteClient
+    image: marine-admin-website-client
+    container_name: MarineAdminWebSiteClient
     ports:
       - 32645:80
