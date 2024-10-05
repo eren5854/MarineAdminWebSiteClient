@@ -1,0 +1,58 @@
+<div style="display: flex;">
+    <h1>Dashboard</h1>
+</div>
+
+<div class="insights">
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            responsive_layout
+            </span>
+        <div class="right">
+            <div class="input-box">
+                <h2>Layout</h2>
+                <form #updateLayout="ngForm" (ngSubmit)="update(updateLayout)">
+                    <div class="input-field mb-2">
+                        <label for="firstName">Slogan</label>
+                        <input [(ngModel)]="layoutModel.slogan"  validate type="text" name="slogan" class="form-control"
+                            id="slogan" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Slogan must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="lastName">Footer About Text</label>
+                        <textarea [(ngModel)]="layoutModel.shortAboutText" validate type="text" name="shortAboutText" class="form-control"
+                            id="shortAboutText" required autocomplete="off" style="height: 200px;"></textarea>
+                        <div class="invalid-feedback">
+                            Footer About Text must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="profilePicture">Image</label>
+                        <input type="file" #fileInput (change)="setImage($event)" name="profilePicture"
+                            class="form-control d-none" id="profilePicture" autocomplete="off">
+                        <div class="input-group">
+                            <img style="width: 60%; height: 60%;" src="https://marqex.webapi.marqexmarine.com/Images/{{layoutModel.image}}" alt="">
+                            <div class="input-group-append">
+                                <button class="btn" type="button" (click)="triggerFileInput()"><span
+                                        class="material-symbols-sharp icons">upload</span></button>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">
+                            Profile picture must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

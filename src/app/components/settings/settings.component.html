@@ -1,0 +1,123 @@
+
+<div style="display: flex;">
+    <h1>User Settings</h1>
+</div>
+
+<div class="insights">
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            person
+            </span>
+        <div class="right">
+            <div class="input-box">
+                <!-- <h2>Information</h2> -->
+                <form #updateUserForm="ngForm" (ngSubmit)="updateUser(updateUserForm)">
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">First Name</label>
+                            <p *ngIf="!userModel.firstName" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="userModel.firstName" validate type="text" name="firstName" class="form-control"
+                            id="firstName" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            First Name must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Last Name</label>
+                            <p *ngIf="!userModel.lastName" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="userModel.lastName" validate type="text" name="lastName" class="form-control"
+                            id="lastName" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Last Name must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">User Name</label>
+                            <p *ngIf="!userModel.userName" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="userModel.userName" validate type="text" name="userName" class="form-control"
+                            id="userName" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Last Name must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">E-Mail</label>
+                            <p *ngIf="!userModel.email" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        
+                        <input [(ngModel)]="userModel.email" validate type="text" name="email" class="form-control"
+                            id="email" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            E-Mail must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <span class="material-symbols-sharp icons">password</span>
+       <div class="right">
+        <div class="input-box">
+            <h2>Change Password</h2>
+            <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">  
+                <div class="input-field mb-3">
+                    <label for="password">Current Password</label>
+                    <input [(ngModel)]="changePasswordModel.currentPassword" validate type="password" name="password" class="form-control" id="password" autocomplete="off">
+                    <div class="invalid-feedback">
+                        Current Password must be valid.
+                    </div>
+                </div>
+                <div class="input-field">
+                    <label for="password">New Password</label>
+                    <div class="input-group mb-3">
+                        <input [(ngModel)]="changePasswordModel.newPassword" required minlength="8" validate (focus)="isPasswordFocus = true" (blur)="isPasswordFocus = false" #password  name="password"   (keyup)="checkRegexPatternForPassword(password)" type="password" class="form-control">
+                        <span class="input-group-text icons" id="basic-addon1">
+                            <i (click)="showOrHidePassword(password)" *ngIf="!isShowPassword" class="fa-solid fa-eye"></i>
+                            <i (click)="showOrHidePassword(password)" *ngIf="isShowPassword" class="fa-solid fa-eye-slash"></i>
+                        </span>
+                      </div>
+                      <div *ngIf="isPasswordFocus" class="psswrd-req">
+                        <ul class="password-ul">
+                            <li class="pw-error" id="minCharacter">Min 8 Character</li>
+                            <li class="pw-error" id="upperLetter">Upper Case</li>
+                            <li class="pw-error" id="lowerLetter">Lower Case</li>
+                        </ul>
+                        <ul class="password-ul">
+                            <li class="pw-error" id="specialLetter">Special Character</li>
+                            <li class="pw-error" id="numLetter">Number</li>
+                        </ul>
+                      </div>
+                </div>
+                <div class="input-field">
+                    <div class="btns">
+                        <button [disabled]="" class="submit">
+                            <i class="fa-solid fa-floppy-disk "></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+

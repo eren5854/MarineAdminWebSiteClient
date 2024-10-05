@@ -1,0 +1,84 @@
+<div style="display: flex;">
+    <h1>Messages</h1>
+</div>
+<div class="insights">
+    <flexi-grid [data]="messages" style="margin-top: 70px;" [pageable]="true" [pageSize]="10" themeClass="light">
+        <flexi-grid-column field="isRead" title="Read" [columnTemplate]="ReadColumnTemplate"></flexi-grid-column>
+        <flexi-grid-column field="email" title="E-Mail"></flexi-grid-column>
+        <flexi-grid-column field="companyName" title="Company"></flexi-grid-column>
+        <flexi-grid-column field="subject" title="Subject"></flexi-grid-column>
+        <!-- <flexi-grid-column field="phone" title="Phone"></flexi-grid-column> -->
+        <flexi-grid-column title="Operations" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>
+
+        <ng-template #customButtonColumnTemplate let-item="item">
+            <flexi-button (click)="openModal(item)" btnColor="primary" [outline]="true">
+                <i class="fa-solid fa-eye"></i>
+            </flexi-button>
+            <flexi-button (click)="deleteById(item.id)" class="ms-1" btnColor="danger" [outline]="true">
+                <i class="fa-solid fa-trash"></i>
+            </flexi-button>
+        </ng-template>
+
+        <ng-template #ReadColumnTemplate let-item="item">
+            @if (!item.isRead) {
+            <span style="color: rgb(177, 177, 177);" class="material-symbols-outlined">
+                done_all
+            </span>
+            }@else {
+            <span style="color: rgb(79, 182, 236)" class="material-symbols-outlined">
+                done_all
+            </span>
+            }
+        </ng-template>
+
+    </flexi-grid>
+</div>
+<div class="modal" [ngStyle]="{'display': showModal ? 'flex' : 'none'}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h3 style="font-size: 25px;">Message Details</h3>
+                    <p>{{selectedMessage?.createdDate | date: "dd/MM/yyy - HH:mm"}}</p>
+                </div>
+                <div class="modal-close-btn" (click)="closeModal()">
+                    <span style="font-size: 44px; cursor: pointer;" class="material-symbols-outlined">
+                        cancel
+                    </span>
+                </div>
+            </div>
+            <div class="sales message-modal">
+                <div class="right">
+                    <div class="input-box">
+                        <div class="grid-container">
+                            <div class="input-field mb-2">
+                                <label for="email">Full Name:</label>
+                                <p>{{ selectedMessage?.fullName }}</p>
+                            </div>
+                            <div class="input-field mb-2">
+                                <label for="email">E-Mail:</label>
+                                <p>{{ selectedMessage?.email }}</p>
+                            </div>
+                            <div class="input-field mb-2">
+                                <label for="companyName">Company Name:</label>
+                                <p>{{ selectedMessage?.companyName }}</p>
+                            </div>
+                            <div class="input-field mb-2">
+                                <label for="phone">Phone:</label>
+                                <p>{{ selectedMessage?.phone }}</p>
+                            </div>
+                            <div class="input-field mb-2">
+                                <label for="subject">Subject:</label>
+                                <p>{{ selectedMessage?.subject }}</p>
+                            </div>
+                            <div class="input-field mb-2 item1">
+                                <label for="messageText">Message Text:</label>
+                                <p class="form-control" style="height: 200px;">{{ selectedMessage?.message }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,184 @@
+<div style="display: flex;">
+    <h1>Home Page</h1>
+    <span (click)="addCard()" style="font-size: 34px; color: green; cursor: pointer;"
+        class="material-symbols-outlined ms-3">
+        add_circle
+    </span>
+</div>
+
+<div class="insights">
+
+    <div *ngIf="addCardDiv" class="sales">
+        <span class="material-symbols-outlined icons">
+            image
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <h2>Services</h2>
+                <form #createHomeImageForm="ngForm" (ngSubmit)="createHomeImage(createHomeImageForm)">
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Title</label>
+                            <p *ngIf="!homeImageModel.title" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="homeImageModel.title" validate type="text" name="linkUrl"
+                            class="form-control" id="linkUrl" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Title must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Image</label>
+                            <p *ngIf="!homeImageModel.image" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input type="file" #fileInput (change)="setImage($event)" name="image"
+                            class="form-control d-none" id="image" autocomplete="off">
+                        <div class="input-group">
+                            <img *ngIf="imageSrc" [src]="imageSrc" style="width: 60%; height: 60%;" alt="Selected Image">
+                            <!-- <input type="text" class="form-control" [value]="aboutModel.image" readonly> -->
+                            <div class="input-group-append">
+                                <button class="btn" type="button" (click)="triggerFileInput()"><span
+                                        class="material-symbols-sharp icons">upload</span></button>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">
+                            Image must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            alternate_email
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <!-- <h2>Information</h2> -->
+                <form #updateHomeForm="ngForm" (ngSubmit)="updateHome(updateHomeForm)">
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Title</label>
+                            <p *ngIf="!homeModel.title" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="homeModel.title" validate type="text" name="title" class="form-control"
+                            id="title" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Title must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Subtitle</label>
+                            <p *ngIf="!homeModel.subtitle" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="homeModel.subtitle" validate type="text" name="subtitle"
+                            class="form-control" id="subtitle" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Subtitle must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Text</label>
+                            <p *ngIf="!homeModel.text" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <textarea style="height: 100px;" [(ngModel)]="homeModel.text" validate type="text" name="text"
+                            class="form-control" id="text" required autocomplete="off"></textarea>
+                        <div class="invalid-feedback">
+                            Text Number must be valid.
+                        </div>
+                    </div>
+
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @for (homeImage of homeImages; track homeImage) {
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            image
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <h2>Service</h2>
+                <form #updateHomeImageForm="ngForm" (ngSubmit)="updateHomeImage(updateHomeImageForm, homeImage)">
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Title</label>
+                            <p *ngIf="!homeImage.title" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="homeImage.title" validate type="text" name="linkUrl" class="form-control"
+                            id="linkUrl" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Link Url must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="address">Image</label>
+                            <p *ngIf="!homeImage.image" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input type="file" #fileInput (change)="setImage($event)" name="image"
+                            class="form-control d-none" id="image" autocomplete="off">
+                        <div class="input-group">
+                            <!-- <img style="width: 60%; height: 60%;" src="https://localhost:7157/Images/{{homeImage.image}}" alt=""> -->
+                            <img *ngIf="homeImage.image" [src]="'https://marqex.webapi.marqexmarine.com/Images/' + homeImage.image" style="width: 60%; height: 60%;" />
+                            <div class="input-group-append">
+                                <button class="btn" type="button" (click)="triggerFileInput()"><span
+                                        class="material-symbols-sharp icons">upload</span></button>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">
+                            Image must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                            <button type="button" (click)="deleteHomeImageById(homeImage.id!)" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    }
+
+    
+</div>

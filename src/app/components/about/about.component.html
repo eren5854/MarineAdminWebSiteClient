@@ -1,0 +1,236 @@
+<div style="display: flex;">
+    <h1>About Us Page</h1>
+    <span (click)="addCard()" style="font-size: 34px; color: green; cursor: pointer;"
+        class="material-symbols-outlined ms-3">
+        add_circle
+    </span>
+</div>
+
+<div class="insights">
+
+    <div *ngIf="addCardDiv" class="sales">
+        <span class="material-symbols-outlined icons">
+            groups
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <form #createAbout="ngForm" (ngSubmit)="create(createAbout)">
+                    <div class="input-field mb-2">
+                        <label for="firstName">Title</label>
+                        <input [(ngModel)]="aboutModel.title" validate type="text" name="title" class="form-control"
+                            id="title" autocomplete="off">
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="lastName">Text</label>
+                        <textarea [(ngModel)]="aboutModel.text" id="text" name="text" class="form-control"
+                            style="height: 200px;">
+                        </textarea>
+                        <div class="invalid-feedback">
+                            Last Name must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="profilePicture">Image</label>
+                        <input type="file" #fileInput (change)="setImage($event)" name="profilePicture"
+                            class="form-control d-none" id="profilePicture" autocomplete="off">
+                        <div class="input-group">
+                            <img *ngIf="imageSrc" [src]="imageSrc" style="width: 60%; height: 60%;"
+                                alt="Selected Image">
+                            <div class="input-group-append">
+                                <button class="btn" type="button" (click)="triggerFileInput()"><span
+                                        class="material-symbols-sharp icons">upload</span></button>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">
+                            Profile picture must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk "></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @for (about of abouts; track about) {
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            groups
+        </span>
+
+        <div class="right">
+            <div class="input-box">
+                <form #updateAbout="ngForm" (ngSubmit)="update(updateAbout, about)">
+                    <div class="input-field mb-2">
+                        <label for="firstName">Title</label>
+                        <input [(ngModel)]="about.title" validate type="text" name="title" class="form-control"
+                            id="title" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Name must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="lastName">Text</label>
+                        <textarea [(ngModel)]="about.text" validate type="text" name="text" class="form-control"
+                            id="text" autocomplete="off" style="height: 200px;"></textarea>
+                        <div class="invalid-feedback">
+                            Last Name must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="profilePicture">Image</label>
+                        <input type="file" #fileInput (change)="setImage($event)" name="profilePicture"
+                            class="form-control d-none" id="profilePicture" autocomplete="off">
+                        <div class="input-group">
+                            <img style="width: 60%; height: 60%;" src="https://marqex.webapi.marqexmarine.com/Images/{{about.image}}"
+                                alt="">
+                            <div style="display: flex; flex-direction: column;" class="input-group-append">
+                                <button class="btn" type="button" (click)="triggerFileInput()"><span
+                                        class="material-symbols-sharp icons">upload</span></button>
+                                <button class="btn" type="button" (click)="deleteImageById(about.id!)"><span
+                                        class="material-symbols-sharp icons">delete</span></button>
+                            </div>
+
+                        </div>
+                        <div class="invalid-feedback">
+                            Profile picture must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+
+                            <button type="button" (click)="deleteById(about.id!)" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+
+<!-- <div style="display: flex;">
+    <h1>About Us Page</h1>
+    <span (click)="addCard()" style="font-size: 34px; color: green; cursor: pointer;"
+        class="material-symbols-outlined ms-3">
+        add_circle
+    </span>
+</div>
+
+<div class="insights">
+    <div>
+        <span class="material-symbols-outlined icons">
+            groups
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <form #createAbout="ngForm" (ngSubmit)="create(createAbout)">
+                    <div class="input-field mb-2">
+                        <label for="firstName">Title</label>
+                        <input [(ngModel)]="aboutModel.title" validate type="text" name="title" class="form-control"
+                            id="title" autocomplete="off">
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="lastName">Text</label>
+                        <textarea [(ngModel)]="aboutModel.text" id="summernote" class="form-control"
+                             style="height: 200px;">
+                        </textarea>
+                        <div class="invalid-feedback">
+                            Last Name must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="profilePicture">Image</label>
+                        <input type="file" #fileInput (change)="setImage($event)" name="profilePicture"
+                            class="form-control d-none" id="profilePicture" autocomplete="off">
+                        <div class="input-group">
+                            <img *ngIf="imageSrc" [src]="imageSrc" style="width: 60%; height: 60%;" alt="Selected Image">
+                            <div class="input-group-append">
+                                <button class="btn" type="button" (click)="triggerFileInput()"><span
+                                        class="material-symbols-sharp icons">upload</span></button>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">
+                            Profile picture must be valid.
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk "></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @for (about of abouts; track about) {
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            groups
+        </span>
+        
+        <div class="right">
+            <div class="input-box">
+                <form #updateAbout="ngForm" (ngSubmit)="update(updateAbout, about)">
+                    <div class="input-field mb-2">
+                        <label for="firstName">Title</label>
+                        <input [(ngModel)]="about.title" validate type="text" name="title" class="form-control"
+                            id="title" required autocomplete="off">
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="lastName">Text</label>
+                        <textarea [(ngModel)]="about.text" validate type="text" name="text" class="form-control"
+                            id="text" autocomplete="off" style="height: 200px;"></textarea>
+                    </div>
+                    <div class="input-field mb-2">
+                        <label for="profilePicture">Image</label>
+                        <input type="file" #fileInput (change)="setImage($event)" name="profilePicture"
+                            class="form-control d-none" id="profilePicture" autocomplete="off">
+                        <div class="input-group">
+                            <img style="width: 60%; height: 60%;" src="https://localhost:7157/Images/{{about.image}}" alt="">
+                            <div class="input-group-append">
+                                <button class="btn" type="button" (click)="triggerFileInput()"><span
+                                        class="material-symbols-sharp icons">upload</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+
+                            <button type="button" (click)="deleteById(about.id!)" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    }
+    
+</div> -->

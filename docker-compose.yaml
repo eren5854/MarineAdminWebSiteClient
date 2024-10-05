@@ -1,0 +1,11 @@
+services:
+
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: marine-website-client
+    container_name: MarineWebSiteClient
+    ports:
+      - 32645:80

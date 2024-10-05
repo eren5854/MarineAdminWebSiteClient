@@ -1,0 +1,143 @@
+
+<div style="display: flex;">
+    <h1>Contact Page</h1>
+    <span (click)="addCard()" style="font-size: 34px; color: green; cursor: pointer;"
+        class="material-symbols-outlined ms-3">
+        add_circle
+    </span>
+</div>
+
+<div class="insights">
+    <div *ngIf="addCardDiv" class="sales">
+        <span class="material-symbols-outlined icons">
+            link
+            </span>
+        <div class="right">
+            <div class="input-box">
+                <h2>Link</h2>
+                <form #createLinkForm="ngForm" (ngSubmit)="createLink(createLinkForm)">
+                    <div class="input-field mb-2">
+                        <label for="address">Link Url</label>
+                        <input [(ngModel)]="linkModel.linkUrl" validate type="text" name="linkUrl" class="form-control"
+                            id="linkUrl" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Link Url must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="email">Link Icon</label>
+                        <input [(ngModel)]="linkModel.linkIcon" validate type="text" name="linkIcon" class="form-control"
+                            id="linkIcon" autocomplete="off">
+                        <div class="invalid-feedback">
+                            Link Icon must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            alternate_email
+            </span>
+        <div class="right">
+            <div class="input-box">
+                <!-- <h2>Information</h2> -->
+                <form #updateInformationForm="ngForm" (ngSubmit)="updateInformation(updateInformationForm)">
+                    <div class="input-field mb-2">
+                        <label for="address">Address</label>
+                        <input [(ngModel)]="contactModel.address" validate type="text" name="address" class="form-control"
+                            id="address" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Address must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="email">E-Mail</label>
+                        <input [(ngModel)]="contactModel.email" validate type="text" name="email" class="form-control"
+                            id="email" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            E-Mail must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input [(ngModel)]="contactModel.phoneNumber" validate type="text" name="phoneNumber" class="form-control"
+                            id="phoneNumber" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            Phone Number must be valid.
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @for (link of links; track link) {
+
+        <div class="sales">
+            <span class="material-symbols-outlined icons">
+                link
+                </span>
+            <div class="right">
+                <div class="input-box">
+                    <h2>Link</h2>
+                    <form #updateLinkForm="ngForm" (ngSubmit)="updateLink(updateLinkForm, link)">
+                        <div class="input-field mb-2">
+                            <label for="address">Link Url</label>
+                            <input [(ngModel)]="link.linkUrl" validate type="text" name="linkUrl" class="form-control"
+                                id="linkUrl" required autocomplete="off">
+                            <div class="invalid-feedback">
+                                Link Url must be valid.
+                            </div>
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="email">Link Icon</label>
+                            <input [(ngModel)]="link.linkIcon" validate type="text" name="linkIcon" class="form-control"
+                                id="linkIcon" autocomplete="off">
+                            <div class="invalid-feedback">
+                                Link Icon must be valid.
+                            </div>
+                        </div>
+    
+                        <div class="input-field">
+                            <div class="btns">
+                                <button type="submit" [disabled]="" class="submit">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    Save
+                                </button>
+                                <button type="button" (click)="deleteLinkById(link.id!)" class="btn btn-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+    
+                </div>
+            </div>
+        </div>
+    }
+</div>

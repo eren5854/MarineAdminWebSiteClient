@@ -1,0 +1,63 @@
+<div class="login">
+   <img src="/assets/img/yacht-4.jpg" alt="image" class="login__bg">
+
+   <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="login__form" autocomplete="off">
+      <h1 class="login__title">Login</h1>
+
+      <div class="login__inputs">
+         <div class="login__box">
+            <input [(ngModel)]="loginModel.emailOrUserName" type="email" id="emailOrUserName" name="emailOrUserName"
+               placeholder="Email ID" required class="login__input">
+            <i class="ri-mail-fill"></i>
+         </div>
+
+         <div class="login__box">
+            <input [(ngModel)]="loginModel.password" type="password" id="password" name="password"
+               placeholder="Password" required class="login__input">
+            <i class="ri-lock-2-fill"></i>
+         </div>
+      </div>
+
+      <div class="login__check">
+         <div class="login__check-box">
+            <input type="checkbox" class="login__check-input" id="user-check">
+         </div>
+
+         <p style="cursor: pointer;" href="#" (click)="showModal = true" class="login__forgot">Forgot Password?</p>
+      </div>
+
+      <button type="submit" class="login__button">Login</button>
+
+      <!-- <div class="login__register">
+          Don't have an account? <a href="#">Register</a>
+       </div> -->
+   </form>
+</div>
+
+
+<div class="modal" [ngStyle]="{'display': showModal ? 'flex' : 'none'}">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="modal-header">
+            <div>
+               <h3 style="font-size: 25px;">E-Posta</h3>
+
+            </div>
+            <div class="modal-close-btn" (click)="showModal = false">
+               <span style="font-size: 44px; cursor: pointer;" class="material-symbols-outlined">
+                  cancel
+               </span>
+            </div>
+         </div>
+         <div class="sales message-modal">
+               <div class="grid-container">
+                  <form #forgotMailForm="ngForm" (ngSubmit)="sendForgotMail(forgotMailForm)">
+                     <p>Şifre değiştirmek için lütfen mail adresinizi giriniz.</p>
+                     <input [(ngModel)]="emailModel.email" name="email" id="email" type="email" class="form-control">
+                     <button type="submit" class="btn btn-primary mt-2">Send</button>
+                  </form>
+               </div>
+         </div>
+      </div>
+   </div>
+</div>
