@@ -8,4 +8,4 @@ services:
     image: marine-admin-website-client
     container_name: MarineAdminWebSiteClient
     ports:
-      - 32645:80
+      - 54035:80
