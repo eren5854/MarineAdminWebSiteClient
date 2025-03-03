@@ -7,6 +7,7 @@ import { SwalService } from './swal.service';
   providedIn: 'root'
 })
 export class HttpService {
+  imageUrl:string = "https://marqex.webapi.marqexmarine.com/Images/"
   // url:string = "https://localhost:7157/api/";
   url:string = "https://marqex.webapi.marqexmarine.com/api/"
   constructor(
@@ -14,6 +15,10 @@ export class HttpService {
     private auth: AuthService,
     private swal: SwalService
   ){}
+
+  getImageUrl(){
+    return this.imageUrl;
+  }
 
   get(api: string, callBack: (res:any) => void){
     this.http.get(`${this.url}${api}`, {

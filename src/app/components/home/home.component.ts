@@ -23,10 +23,15 @@ export class HomeComponent {
 
   addCardDiv = false;
 
+  imageUrl?: string;
+  selectedImageUrl: string | null = null;
+
   constructor(
     private http: HttpService,
     private swal: SwalService
   ){
+    this.imageUrl = this.http.getImageUrl();
+    
     this.getAllHome();
     this.getAllHomeImage();
   }
@@ -59,7 +64,7 @@ export class HomeComponent {
     this.homeImageModel.homeId = this.homeModel.id;
     const formData: FormData = new FormData();
     if (form.valid) {
-      formData.append("title", this.homeImageModel.title);
+      formData.append("title", this.homeImageModel.title!);
       formData.append("image", this.fileInput.nativeElement.files[0]);
       formData.append("homeId", this.homeImageModel.homeId!);
       this.http.post("HomeImages/Create", formData, (res) => {
@@ -76,7 +81,7 @@ export class HomeComponent {
     const formData: FormData = new FormData();
     if (form.valid) {
       formData.append("id", homeImage.id!)
-      formData.append("title", homeImage.title);
+      formData.append("title", homeImage.title!);
       formData.append("image", this.fileInput.nativeElement.files[0]);
       formData.append("homeId", homeImage.homeId!);
       this.http.post("HomeImages/Update", formData, (res) => {
@@ -97,16 +102,19 @@ export class HomeComponent {
     });
   }
 
-  setImage(event: any) {
+  setImage(event: any, homeImage: HomeImageModel) {
     const file = event.target.files[0];
     if (file) {
+      homeImage.image = file.name;
+  
       const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
-      reader.readAsDataURL(file); // Dosyayı base64 formatına çevir ve önizle
-      this.homeImageModel.image = file.name;
-      console.log(this.homeImageModel.image);
+      reader.onload = (e: any) => {
+        homeImage.previewImage = e.target.result; // Sadece ilgili homeImage için önizleme URL'si atanıyor
+      };
+      reader.readAsDataURL(file);
     }
   }
+  
 
   triggerFileInput() {
     this.fileInput.nativeElement.click();

@@ -22,6 +22,7 @@ export class PortfolioComponent {
   imageSrc: string | ArrayBuffer | null = null;
 
   addCardDiv = false;
+  imageUrl?: string;
   selectedImageUrl: string | null = null;
 
   constructor(
@@ -29,6 +30,7 @@ export class PortfolioComponent {
     private swal: SwalService
   ) {
     this.getAll();
+    this.imageUrl = this.http.getImageUrl();
   }
 
   ngAfterViewInit(){
@@ -92,14 +94,16 @@ export class PortfolioComponent {
     });
   }
 
-  setImage(event: any) {
+  setImage(event: any, portfolio: PortfolioModel) {
     const file = event.target.files[0];
     if (file) {
+      portfolio.image = file.name;
+  
       const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
-      reader.readAsDataURL(file); // Dosyayı base64 formatına çevir ve önizle
-      this.portfolioModel.image = file.name;
-      console.log(this.portfolioModel.image);
+      reader.onload = (e: any) => {
+        portfolio.previewImage = e.target.result; // Sadece ilgili homeImage için önizleme URL'si atanıyor
+      };
+      reader.readAsDataURL(file);
     }
   }
 

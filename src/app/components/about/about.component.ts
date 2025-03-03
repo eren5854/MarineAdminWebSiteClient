@@ -3,7 +3,6 @@ import { AboutModel } from '../../models/about.model';
 import { HttpService } from '../../services/http.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { SwalService } from '../../services/swal.service';
 
 declare var $: any;
@@ -11,7 +10,7 @@ declare var $: any;
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule],
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
@@ -23,11 +22,15 @@ export class AboutComponent implements AfterViewInit {
   addCardDiv = false;
   imageSrc: string | ArrayBuffer | null = null;
 
+  imageUrl?: string;
+  selectedImageUrl: string | null = null;
+
   constructor(
     private http: HttpService,
     private swal: SwalService
   ) {
     this.getAll();
+    this.imageUrl = this.http.getImageUrl();
   }
 
   ngAfterViewInit() {
@@ -55,7 +58,7 @@ export class AboutComponent implements AfterViewInit {
     const formData: FormData = new FormData();
     if (form.valid) {
       formData.append("title", this.aboutModel.title!);
-      formData.append("text", this.aboutModel.text);
+      formData.append("text", this.aboutModel.text!);
       formData.append("image", this.fileInput.nativeElement.files[0]);
       this.http.post("Abouts/Create", formData, (res) => {
         console.log(res);
@@ -72,7 +75,7 @@ export class AboutComponent implements AfterViewInit {
     if (form.valid) {
       formData.append("id", about.id!);
       formData.append("title", about.title!);
-      formData.append("text", about.text);
+      formData.append("text", about.text!);
       formData.append("image", this.fileInput.nativeElement.files[0]);
       this.http.post("Abouts/Update", formData, (res) => {
         console.log(res);
@@ -99,14 +102,16 @@ export class AboutComponent implements AfterViewInit {
     });
   }
 
-  setImage(event: any) {
+  setImage(event: any, about: AboutModel) {
     const file = event.target.files[0];
     if (file) {
+      about.image = file.name;
+  
       const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
-      reader.readAsDataURL(file); // Dosyayı base64 formatına çevir ve önizle
-      this.aboutModel.image = file.name;
-      console.log(this.aboutModel.image);
+      reader.onload = (e: any) => {
+        about.previewImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 

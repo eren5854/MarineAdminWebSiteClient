@@ -1,7 +1,8 @@
 export class AboutModel{
     id?: string;
     title?: string;
-    text: string = "";
+    text?: string;
     image: any;
-    selectedImageUrl?: string; // Yeni alan
+    selectedImageUrl?: string;
+    previewImage:any = null;
 }

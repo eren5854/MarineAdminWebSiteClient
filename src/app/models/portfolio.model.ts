@@ -3,4 +3,5 @@ export class PortfolioModel{
     title: string = "";
     description: string = "";
     image: any;
+    previewImage:any = null;
 }

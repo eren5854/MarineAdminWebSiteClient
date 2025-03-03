@@ -12,8 +12,8 @@ export class EmailJsService {
   ) { }
   sendEmail(form: any) {
     return emailjs
-    .send('service_lndnj3h', 'template_403a0wr', form, {
-      publicKey: '7wf-_6cx5Yq-L8nE1',
+    .send('service_ap2rdj4', 'template_pmi5ynu', form, {
+      publicKey: 'w6mRiXwXx8zcAn-EZ',
     })
     .then(
       (response) => {
