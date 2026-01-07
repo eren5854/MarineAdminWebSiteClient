@@ -55,8 +55,6 @@ export class HomeComponent {
   getAllHomeImage(){
     this.http.get("HomeImages/GetAll", (res) => {
       this.homeImages = res.data;
-      console.log(this.homeImages);
-      
     })
   }
 

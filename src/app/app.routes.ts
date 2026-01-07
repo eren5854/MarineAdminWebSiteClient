@@ -11,6 +11,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { MessageComponent } from './components/message/message.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ReferanceComponent } from './components/referance/referance.component';
+import { CertificateComponent } from './components/certificate/certificate.component';
 
 export const routes: Routes = [
     {
@@ -41,6 +43,14 @@ export const routes: Routes = [
             {
                 path: "portfolio",
                 component: PortfolioComponent
+            },
+            {
+                path: "reference",
+                component: ReferanceComponent
+            },
+            {
+                path: "certificate",
+                component: CertificateComponent
             },
             {
                 path: "contact",

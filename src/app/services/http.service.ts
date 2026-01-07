@@ -51,15 +51,28 @@ export class HttpService {
         this.swal.callToast(res.data, 'success');
       },
       error: (err: HttpErrorResponse) => {
-        if (!err.error.isSuccess) {
-          console.log(err.error.errorMessages);
-          console.log(err.error.errors);
-          
-          this.swal.callToast(err.error.errorMessages[0], 'warning');
+        console.log(err);
+      let errorMessage = "Bir hata oluştu!";
+
+      if (err.status === 400) {
+        // 1. Durum: API'den gelen 'errors' objesi (Validasyon Hataları)
+        if (err.error.errors) {
+          const errors = err.error.errors;
+          // Objeyi diziye çevirip ilk hatayı alıyoruz
+          const firstKey = Object.keys(errors)[0];
+          errorMessage = errors[firstKey][0];
+        } 
+        // 2. Durum: Senin daha önceki yapındaki 'errorMessages' dizisi
+        else if (err.error.errorMessages) {
+          errorMessage = err.error.errorMessages[0];
         }
-        else{
-          console.log(err);
+        // 3. Durum: Direkt 'title' veya 'message' gelmesi
+        else if (err.error.title) {
+          errorMessage = err.error.title;
         }
+      }
+
+      this.swal.callToast(errorMessage, 'error');
       }
     });
   }

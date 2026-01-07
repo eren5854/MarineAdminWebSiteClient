@@ -2,7 +2,8 @@
     <aside id="aside" #sideMenu>
         <div class="top">
             <div class="logo">
-                <img style="width: 130px; height: 100%; filter: invert(0%) brightness(100%);" src="/assets/img/logo png.png" alt="">
+                <img style="width: 130px; height: 100%; filter: invert(0%) brightness(100%);"
+                    src="/assets/img/logo png.png" alt="">
                 <!-- <h2>Mar<span class="danger">Qex</span></h2> -->
             </div>
             <div class="close" id="close-btn">
@@ -10,20 +11,20 @@
             </div>
         </div>
         <div class="sidebar">
-            <a routerLink="/" >
+            <a routerLink="/">
                 <span class="material-symbols-sharp">grid_view</span>
                 <h3>Dashboard</h3>
             </a>
-            <a routerLink="/home" >
+            <a routerLink="/home">
                 <span class="material-symbols-outlined">
                     home
-                    </span>
+                </span>
                 <h3>Home</h3>
             </a>
             <a routerLink="/portfolio">
                 <span class="material-symbols-outlined">
                     work
-                    </span>
+                </span>
                 <h3>Portfolio</h3>
             </a>
             <a routerLink="/about">
@@ -32,6 +33,18 @@
                 </span>
                 <h3>About Us</h3>
             </a>
+            <a routerLink="/reference">
+                <span class="material-symbols-outlined">
+                    person_book
+                </span>
+                <h3>References</h3>
+            </a>
+            <a routerLink="/certificate">
+                <span class="material-symbols-outlined">
+                    workspace_premium
+                </span>
+                <h3>Certificates</h3>
+            </a>
             <a routerLink="/message">
                 <span class="material-symbols-sharp">mail_outline</span>
                 <h3>Messages</h3>
@@ -39,25 +52,25 @@
             <a routerLink="/contact">
                 <span class="material-symbols-outlined">
                     contacts
-                    </span>
+                </span>
                 <h3>Contact</h3>
             </a>
-            <a routerLink="/settings" >
+            <a routerLink="/settings">
                 <span class="material-symbols-sharp">settings</span>
                 <h3>Settings</h3>
             </a>
             <a (click)="logout()" href="/">
-                <span  class="material-symbols-sharp">logout</span>
+                <span class="material-symbols-sharp">logout</span>
                 <h3>Log Out</h3>
             </a>
         </div>
     </aside>
-    
+
     <main>
         <router-outlet></router-outlet>
     </main>
 
-   
+
     <div class="right">
         <div class="top">
             <button id="menu-btn">
@@ -66,7 +79,7 @@
             <div class="theme-toggler" (click)="toggleTheme()">
                 <span class="material-symbols-sharp" [class.active]="!isDarkTheme">light_mode</span>
                 <span class="material-symbols-sharp" [class.active]="isDarkTheme">dark_mode</span>
-              </div>
+            </div>
             <div class="profile">
                 <div class="info">
                     <h4 style="font-size: 14px; font-weight: 700;"> {{auth.user.fullName}}</h4>
@@ -83,17 +96,17 @@
             <h2>{{messageCount}} New Incoming Message</h2>
             <div class="updates">
                 @for (message of messages; track message) {
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="/assets/img/default-user-1.png" alt="">
-                        </div>
-                        <div class="message">
-                            <p><b>{{message.fullName}}</b>, {{message.email}}</p>
-                            <p>{{message.subject}}</p>
+                <div class="update">
+                    <div class="profile-photo">
+                        <img src="/assets/img/default-user-1.png" alt="">
+                    </div>
+                    <div class="message">
+                        <p><b>{{message.fullName}}</b>, {{message.email}}</p>
+                        <p>{{message.subject}}</p>
 
-                            <small class="text-muted-1">{{message.createdDate | date: "dd MM yyyy - HH:mm"}}</small>
-                        </div>
-                    </div>    
+                        <small class="text-muted-1">{{message.createdDate | date: "dd MM yyyy - HH:mm"}}</small>
+                    </div>
+                </div>
                 }
                 <!-- <div class="update">
                     <div class="profile-photo">
